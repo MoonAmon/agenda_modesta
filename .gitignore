@@ -1,0 +1,133 @@
+# Bytecode e cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+
+# Ambiente virtual
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Configuração local/credenciais
+*.env
+*.env.*
+.envrc
+
+# SQLite / bancos locais
+db.sqlite3
+db.sqlite3-journal
+
+# Arquivos de migração compilados
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Logs
+*.log
+logs/
+log/
+
+# Media/arquivos enviados
+media/
+uploads/
+
+# Static gerado por collectstatic
+staticfiles/
+static/
+
+# Ferramentas/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage / testes
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.tox/
+.nox/
+
+# Distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Docker
+docker-compose.override.yml
+*.pid
+```# filepath: c:\Users\Moon\Desktop\agenda_modesta\agenda_modesta\.gitignore
+# Bytecode e cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.dylib
+
+# Ambiente virtual
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Configuração local/credenciais
+*.env
+*.env.*
+.envrc
+
+# SQLite / bancos locais
+db.sqlite3
+db.sqlite3-journal
+
+# Arquivos de migração compilados
+*/migrations/__pycache__/
+*/migrations/*.pyc
+
+# Logs
+*.log
+logs/
+log/
+
+# Media/arquivos enviados
+media/
+uploads/
+
+# Static gerado por collectstatic
+staticfiles/
+static/
+
+# Ferramentas/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage / testes
+htmlcov/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.tox/
+.nox/
+
+# Distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+# Docker
+docker-compose.override.yml
+*.pid
