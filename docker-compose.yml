@@ -1,9 +1,67 @@
 services:
+  db:
+    image: postgres:14-alpine
+    container_name: agenda_modesta_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-agenda_modesta}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agenda_modesta_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: agenda_modesta_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - agenda_modesta_network
+
   web:
     build: .
-    ports:
-      - "8000:8000"
+    container_name: agenda_modesta_web
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
+    ports:
+      - "8000:8000"
     environment:
-      - DEBUG=1
+      - DEBUG=${DEBUG:-True}
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=${DB_NAME:-agenda_modesta}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_HOST=redis://redis:6379/0
+    depends_on:
+        db:
+          condition: service_healthy
+        redis:
+          condition: service_healthy
+    networks:
+      - agenda_modesta_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  agenda_modesta_network:
+    driver: bridge
